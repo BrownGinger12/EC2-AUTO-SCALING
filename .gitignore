@@ -32,3 +32,10 @@ terraform.rc
 Thumbs.db
 .vscode/
 .idea/
+
+# Ignore terraform.tfvars files, which are likely to contain sensitive data, such as
+terraform.tfvars
+
+# Ignore terraform.tfvars.json files, which are likely to contain sensitive data, such as
+backend-dev.hcl
+backend-prod.hcl
