@@ -9,6 +9,6 @@ variable "public_subnet_ids" {
 }
 
 variable "asg_sg_id" {
-    description = "Security group ID for the EC2 instances"
-    type        = string
+  description = "Security group ID for the EC2 instances"
+  type        = string
 }

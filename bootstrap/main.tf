@@ -69,7 +69,7 @@ resource "aws_s3_bucket_policy" "tf_state" {
         Action    = "s3:*"
         Resource  = [aws_s3_bucket.tf_state.arn, "${aws_s3_bucket.tf_state.arn}/*"]
         Condition = {
-          ArnNotLike = { "aws:PrincipalArn" = var.admin_principal_arns }
+          ArnNotLike = { "aws:PrincipalArn" = local.state_bucket_principals }
         }
       }
     ]

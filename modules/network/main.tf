@@ -26,7 +26,7 @@ resource "aws_subnet" "public" {
 
   vpc_id                  = aws_vpc.this.id
   availability_zone       = each.key
-  cidr_block              = cidrsubnet(var.vpc_cidr, 8, each.value)      # 10.0.0.0/24, 10.0.1.0/24
+  cidr_block              = cidrsubnet(var.vpc_cidr, 8, each.value) # 10.0.0.0/24, 10.0.1.0/24
   map_public_ip_on_launch = true
 
   tags = { Name = "${var.name}-public-${each.key}" }
@@ -37,7 +37,7 @@ resource "aws_subnet" "private" {
 
   vpc_id            = aws_vpc.this.id
   availability_zone = each.key
-  cidr_block        = cidrsubnet(var.vpc_cidr, 8, each.value + 10)       # 10.0.10.0/24, 10.0.11.0/24
+  cidr_block        = cidrsubnet(var.vpc_cidr, 8, each.value + 10) # 10.0.10.0/24, 10.0.11.0/24
 
   tags = { Name = "${var.name}-private-${each.key}" }
 }
@@ -61,7 +61,7 @@ resource "aws_route_table_association" "public" {
 
 resource "aws_eip" "nat" {
   for_each = toset(local.nat_azs)
-  domain = "vpc"
+  domain   = "vpc"
 
   tags = { Name = "${var.name}-nat-eip-${each.key}" }
 }
@@ -77,7 +77,7 @@ resource "aws_nat_gateway" "this" {
 
 resource "aws_route_table" "private" {
   for_each = aws_subnet.private
-  vpc_id = aws_vpc.this.id
+  vpc_id   = aws_vpc.this.id
 
   tags = { Name = "${var.name}-private-rt-${each.key}" }
 }
@@ -88,8 +88,8 @@ resource "aws_route" "private_nat" {
   destination_cidr_block = "0.0.0.0/0"
   nat_gateway_id = (
     var.single_nat_gateway
-    ? aws_nat_gateway.this[local.azs[0]].id   # everyone uses the one NAT
-    : aws_nat_gateway.this[each.key].id       # each AZ uses its own
+    ? aws_nat_gateway.this[local.azs[0]].id # everyone uses the one NAT
+    : aws_nat_gateway.this[each.key].id     # each AZ uses its own
   )
 }
 

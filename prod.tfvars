@@ -1,0 +1,6 @@
+name          = "web-prod"
+ami_id        = "ami-07887b6789db08b82"
+network_name  = "web-prod"
+environment   = "prod"
+region        = "ap-southeast-2"
+instance_type = "t2.micro"

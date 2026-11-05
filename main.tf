@@ -10,8 +10,8 @@ module "compute" {
 }
 
 module "network" {
-  source = "./modules/network"
-  name   = var.network_name
+  source             = "./modules/network"
+  name               = var.network_name
   single_nat_gateway = var.environment == "dev"
 }
 

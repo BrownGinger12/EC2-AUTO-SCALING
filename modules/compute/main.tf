@@ -33,7 +33,7 @@ resource "aws_autoscaling_group" "this" {
   max_size         = var.max_size
 
   health_check_type         = "ELB"
-  health_check_grace_period = 120              
+  health_check_grace_period = 120
 
   launch_template {
     id      = aws_launch_template.this.id
@@ -80,8 +80,8 @@ resource "aws_vpc_security_group_egress_rule" "instance_all_out" {
 
 resource "aws_vpc_security_group_ingress_rule" "instance_from_alb" {
   security_group_id            = aws_security_group.this.id
-  referenced_security_group_id = var.alb_sg_id 
-  from_port                    = 80                        
+  referenced_security_group_id = var.alb_sg_id
+  from_port                    = 80
   to_port                      = 80
   ip_protocol                  = "tcp"
 }
