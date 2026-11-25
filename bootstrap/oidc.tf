@@ -6,12 +6,6 @@ resource "aws_iam_openid_connect_provider" "github" {
   thumbprint_list = ["6938fd4d98bab03faadb97b34396831e3780aea1"]
 }
 
-data "aws_iam_openid_connect_provider" "github" {
-  count = var.create_github_oidc_provider ? 0 : 1
-
-  url = "https://token.actions.githubusercontent.com"
-}
-
 resource "aws_iam_role" "github_actions" {
   for_each = local.ci_environments
 

@@ -1,5 +1,5 @@
 locals {
-  repository = "${var.github_owner}/${var.github_repository_name}"
+  repository = "${var.github_owner}@${data.github_user.owner.id}/${var.github_repository_name}@${data.github_repository.repo.repo_id}"
   
   ci_environments = {
     dev = {
