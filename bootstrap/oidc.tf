@@ -1,26 +1,3 @@
-locals {
-  ci_environments = {
-    dev = {
-      subjects = [
-        "repo:${var.github_repository}:environment:dev",
-        "repo:${var.github_repository}:pull_request",
-      ]
-    }
-    prod = {
-      subjects = [
-        "repo:${var.github_repository}:environment:prod",
-        "repo:${var.github_repository}:pull_request",
-      ]
-    }
-  }
-
-  github_oidc_arn = var.create_github_oidc_provider ? aws_iam_openid_connect_provider.github[0].arn : data.aws_iam_openid_connect_provider.github[0].arn
-  state_bucket_principals = concat(
-    var.admin_principal_arns,
-    [for role in aws_iam_role.github_actions : role.arn],
-  )
-}
-
 resource "aws_iam_openid_connect_provider" "github" {
   count = var.create_github_oidc_provider ? 1 : 0
 

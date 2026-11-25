@@ -1,18 +1,5 @@
 data "aws_caller_identity" "current" {}
 
-terraform {
-  required_providers {
-    aws = {
-      source  = "hashicorp/aws"
-      version = "~> 5.0"
-    }
-  }
-}
-
-provider "aws" {
-  region = "ap-southeast-2"
-}
-
 resource "aws_s3_bucket" "tf_state" {
   bucket = "terraform-state-${data.aws_caller_identity.current.account_id}-ap-southeast-2"
 
